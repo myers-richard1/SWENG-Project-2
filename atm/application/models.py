@@ -32,4 +32,52 @@ class Account(models.Model):
     def __str__(self):
         return "%s %s" % (self.name, self.account_number)
 
+class ATMachine(models.Model):
+    ATM_UID = models.AutoField(primary_key=True)
+    balance = models.PositiveIntegerField()
+    location = models.CharField(max_length = 100)
+    minimum_balance = models.IntegerField()
+    status = models.CharField(max_length = 100)
+    last_refill_date = models.DateField()
+    next_maintenance_date = models.DateField()
+
+class ATM_Refill(models.Model):
+    refill_ID = models.AutoField(primary_key=True)
+    ATM_UID = models.ForeignKey(ATMachine, on_delete=models.DO_NOTHING)
+    amount = models.PositiveIntegerField()
+    atm_branch = models.CharField(max_length= 100)
+    refill_date = models.DateField()
+    pervious_balance = models.PositiveIntegerField()
+
+class Transaction(models.Model):
+    class Meta:
+        abstract= True
+    transaction_id = models.AutoField(primary_key=True)
+    card_number = models.ForeignKey(Card, on_delete=models.DO_NOTHING)
+    date_of_transaction = models.DateField()
+    ATM_UID = models.ForeignKey(ATMachine, on_delete=models.DO_NOTHING)
+    status = models.CharField(max_length= 100)
+    response_code = models.IntegerField()
+    transaction_type = models.CharField(max_length= 100)
+
+class PhoneChangeTransaction(Transaction):
+    new_phone_number = models.CharField(max_length=11)
+
+class PinChangeTransaction(Transaction):
+    previous_pin = models.CharField(max_length=4)
+    new_pin = models.CharField(max_length=4)
+
+class CashWithdrawalTransaction(Transaction):
+    amount_transferred = models.PositiveIntegerField()
+    denomination = models.CharField()
+    current_balance = models.IntegerField()
+
+class CashTransferTransaction(Transaction):
+    #this is the beneficiary's account number
+    account_number = models.ForeignKey(Account, on_delete=models.DO_NOTHING)
+    beneficiary_name = models.CharField(max_length=100)
+    amount_transferred = models.PositiveIntegerField()
+
+class BalanceInquiryTransaction(Transaction):
+    balance_amount = models.IntegerField()
     
