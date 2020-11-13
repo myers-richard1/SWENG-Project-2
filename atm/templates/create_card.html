@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %} card creation {% endblock %}
+{% block title %} Admin Log-in {% endblock %}
 
 {% block body %}
 
-<h1>Card creation page</h1>
+<h1>Admin Log-in</h1>
+
+<div class="container">
+
+    <form action="" method="post">
+
+        {{form.as_p}}
+            <input type="submit" value="Save">
+
+    </form>
 
 
+</div>
 
 {% endblock %}

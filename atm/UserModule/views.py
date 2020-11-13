@@ -18,3 +18,6 @@ def withdraw(request):
 
 def transfer(request):
     return render(request, 'transfer.html')
+
+def login_fail(request):
+    return render(request, 'login_fail.html')
