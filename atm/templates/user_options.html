@@ -6,6 +6,13 @@
 
 <h1>This is the user options page.(check balace, withdraw, transfer funds)</h1>
 
+    <!--We want to link to /card_num/check_balance-->
+    Card number: {{card_num}}
+    <li><a href="{% url 'check_balance' card_num%}">Check Balance</a></li>
+    <li><a href="{% url 'withdraw' card_num%}">Withdraw</a></li>
+    <li><a href="{% url 'transfer' card_num%}">Transfer</a></li>
+
+
 <p>This is the user options page.(check balace, withdraw, transfer funds)</p>
 
 {% endblock %}

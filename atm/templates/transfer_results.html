@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Transfer {% endblock %}
+
+{% block body %}
+
+Successful transfer from card {{card_num}} to account {{beneficiary}}
+<br>
+Remaining Balance: {{balance}}
+<li><a href="{% url 'options' card_num%}">Return to options</a></li>
+
+{% endblock %}
