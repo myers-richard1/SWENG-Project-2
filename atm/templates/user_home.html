@@ -8,12 +8,13 @@
 
 <div class="container">
 
-    <form action="" method="post">
-
+    <form action="{% url 'verify' %}" method="post">
+        {% csrf_token %}
         {{form.as_p}}
             <input type="submit" value="Log-in">
 
     </form>
+    <li><a href="{% url 'account_creation_options' %}">Create Account</a></li>
 
 
 </div>

@@ -4,8 +4,15 @@
 
 {% block body %}
 
-<h1>This is where the user will input the amount to withdraw</h1>
-
-<p>This is where the user will input the amount to withdraw</p>
+    Card num: {{card_num}}
+    <form action="{% url 'process_withdrawal' card_num%}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+            <label for="amount" >Amount:</label>
+            <input type="text" name="amount"><br>
+            <input type="submit" value="Withdraw">
+    
+    </form>
+    
 
 {% endblock %}

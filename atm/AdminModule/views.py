@@ -6,7 +6,6 @@ from .forms import LoginForm
 def admin_home(request):
     context = {
         "form":LoginForm
-
     }
     return render(request, 'admin_home.html', context)
 
