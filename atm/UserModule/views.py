@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.shortcuts import HttpResponseRedirect
-from .forms import LoginForm
+from .forms import LoginForm, WithdrawalForm
 from application.models import Card, Account
 import datetime
 from datetime import timedelta
@@ -60,7 +60,7 @@ def user_options(request, card_num):
 
 #get
 def withdraw(request, card_num):
-    context = {'card_num' : card_num}
+    context = {'card_num' : card_num, 'form':WithdrawalForm}
     return render(request, 'withdraw.html', context)
 
 #post
@@ -87,7 +87,6 @@ def withdrawal_results(request, card_num):
     balance_str = "$%.2f" % account.balance
     context = {'card_num':card_num, 'balance':balance_str}
     return render(request, "withdrawal_results.html", context)
-
 
 #get
 def transfer(request, card_num):
