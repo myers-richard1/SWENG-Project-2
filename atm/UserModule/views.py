@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.shortcuts import HttpResponseRedirect
 from .forms import *
-from application.models import Card, Account
+from application.models import Card, Account, CashWithdrawalTransaction, CashTransferTransaction, ATMachine
 import datetime
-from datetime import timedelta
+from datetime import timedelta, date
 import decimal
 
 
@@ -74,6 +74,10 @@ def withdraw(request, card_num):
 #post
 def process_withdrawal(request, card_num):
     try:
+        card = Card.objects.get(pk=card_num)
+    except Card.DoesNotExist:
+        return HttpResponse("Could not find card")
+    try:
         account = Account.objects.get(card=card_num)
     except Account.DoesNotExist:
         return HttpResponse("Could not find account")
@@ -83,7 +87,13 @@ def process_withdrawal(request, card_num):
     else:
         account.balance -= decimal.Decimal(amount)
         account.save()
-    #TODO create transaction record
+    
+    #TODO use actual atm instead of defaulting to ATM 1
+    atm = ATMachine.objects.get(pk=1)
+    transaction = CashWithdrawalTransaction(card_number=card, ATM_UID=atm, status="Approved",
+        date_of_transaction=date.today(), response_code="100", transaction_type="Withdrawal", amount_transferred=amount,
+        denomination=".01", current_balance=account.balance)
+    transaction.save()
     return HttpResponseRedirect('/%s/withdrawal_results' % card_num)
 
 #get
@@ -121,7 +131,12 @@ def process_transfer(request, card_num):
         account.save()
         card.account.balance -= amount_dec
         card.account.save()
-    #TODO create transaction record
+    #TODO use actual atm instead of defaulting to the first one
+    atm = ATMachine.objects.get(pk=1)
+    transaction = CashTransferTransaction(card_number=card, ATM_UID=atm, status="Approved",
+        date_of_transaction=date.today(), response_code="100", transaction_type="Transfer",
+        account_number=account, amount_transferred=amount, beneficiary_name=account.name)
+    transaction.save()
     return HttpResponseRedirect('/%s/%s/transfer_results' % (card_num, beneficiary))
 
 #get
