@@ -16,5 +16,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('verification/', verify, name="verify"),
     path('create_account', create_account, name="create_account"),
-    path('account_creation_options/', account_creation_options, name="account_creation_options")
+    path('account_creation_options/', account_creation_options, name="account_creation_options"),
+    path('login_fail/', login_fail, name="login_fail")
 ]

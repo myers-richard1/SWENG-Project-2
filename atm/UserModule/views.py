@@ -19,10 +19,13 @@ def user_home(request):
 #post
 def verify(request):
     card_num = request.POST['card_number']
+    pin = request.POST['pin']
     try:
         card = Card.objects.get(pk=card_num)
     except Card.DoesNotExist:
         return HttpResponse("Invalid card number.")
+    if (card.pin != pin):
+        return HttpResponse("Invalid pin.")
     print("Redirecting...")
     return HttpResponseRedirect("/%s/options" % card_num)
 
