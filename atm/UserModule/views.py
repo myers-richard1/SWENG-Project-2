@@ -23,11 +23,15 @@ def verify(request):
     try:
         card = Card.objects.get(pk=card_num)
     except Card.DoesNotExist:
-        return HttpResponse("Invalid card number.")
+        return HttpResponseRedirect("/login_fail/")
     if (card.pin != pin):
-        return HttpResponse("Invalid pin.")
+        return HttpResponseRedirect("/login_fail/")
     print("Redirecting...")
     return HttpResponseRedirect("/%s/options" % card_num)
+
+def login_fail(request):
+    context = {'form':LoginForm}
+    return render(request, "login_fail.html", context)
 
 #post
 def create_account(request):
