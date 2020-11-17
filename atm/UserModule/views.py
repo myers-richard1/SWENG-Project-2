@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.shortcuts import HttpResponseRedirect
-from .forms import LoginForm, WithdrawalForm
+from .forms import *
 from application.models import Card, Account
 import datetime
 from datetime import timedelta
@@ -50,7 +50,8 @@ def create_account(request):
 
 #get
 def account_creation_options(request):
-    return render(request, "account_creation_options.html")
+    context = {'form':AccountCreationForm}
+    return render(request, "account_creation_options.html", context)
 
 #get
 def user_options(request, card_num):
