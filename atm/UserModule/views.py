@@ -162,4 +162,32 @@ def check_balance(request, card_num):
     balance_str = "$%.2f" % card.account.balance
     context = {'card_num': card_num, 'balance':balance_str}
     return render(request, "check_balance.html", context)
-    return HttpResponse("Balance for card %s: $%.2f" % (card_num , card.account.balance))
+
+#get
+def view_transactions(request, card_num):
+    try:
+        card = Card.objects.get(pk=card_num)
+    except Card.DoesNotExist:
+        return HttpResponse("Invalid card number.")
+    transfer_str = ""
+    transactions_exist = False
+    try:
+        transactions = CashTransferTransaction.objects.filter(card_number=card)
+        transactions_exist = True
+        for transaction in transactions:
+            transfer_str += str(transaction.amount_transferred) + "\n"
+    except CashTransferTransaction.DoesNotExist:
+        transfer_str += "No cash transfer transactions\n"
+    
+    withdrawal_str = ""
+    try:
+        transactions = CashWithdrawalTransaction.objects.filter(card_number=card)
+        transactions_exist = True
+        for transaction in transactions:
+            withdrawal_str += str(transaction.amount_transferred) + "\n"
+    except CashWithdrawalTransaction.DoesNotExist:
+        withdrawal_str += "No cash withdrawal transactions\n"
+
+    context = {"transfers":transfer_str, "withdrawals":withdrawal_str, "card_num":card_num}
+    
+    return render(request, "view_transactions.html", context)

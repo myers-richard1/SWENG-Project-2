@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Transfer {% endblock %}
+
+{% block body %}
+
+Transfers:<br>
+{{transfers}}
+<br><br>
+Withdrawals:<br>
+{{withdrawals}}
+<li><a href="{% url 'options' card_num%}">Return to options</a></li>
+
+{% endblock %}
