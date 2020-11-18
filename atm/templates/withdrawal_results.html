@@ -4,9 +4,13 @@
 
 {% block body %}
 
-Successful withdrawal from card {{card_num}}.
+<h1><u>Withdrawal Successful</u></h1>
 <br>
-Remaining Balance: {{balance}}
-<li><a href="{% url 'options' card_num%}">Return to options</a></li>
 
+<h3>Successful withdrawal from card {{card_num}}.</h3>
+<br>
+
+<h3>Remaining Balance: {{balance}}</h3>
+<br>
+<a href="{% url 'options' card_num%}" class="btn btn-dark btn-lg">Return</a>
 {% endblock %}

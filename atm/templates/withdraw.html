@@ -4,13 +4,24 @@
 
 {% block body %}
 
+    <h1><u>Withdraw Funds</u></h1>
+    <br>
+
     Card num: {{card_num}}
+    <br><br>
     <form action="{% url 'process_withdrawal' card_num%}" method="post">
+        <table>
         {% csrf_token %}
-        {{form.as_p}}
+        {{form.as_table}}
+        </table>
+        <br>
             <input type="submit" value="Withdraw">
     
     </form>
+
+<br>
+
+<a href="{% url 'options' card_num%}" class="btn btn-dark btn-lg">Return</a>
     
 
 {% endblock %}

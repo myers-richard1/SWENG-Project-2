@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<h1>User Log-in</h1>
+<h1><u>User Log-in</u></h1><br>
 
 <div class="center">
 
@@ -13,11 +13,14 @@
         {% csrf_token %}
         {{form.as_table}}
 
+
     </table>
+         <br>
+         <input type="submit" value="Submit">
          </form>
+<br>
+    <a href="{% url 'account_creation_options' %}" class="btn btn-dark btn-lg">Create Account</a>
 
-
-    <li><a href="{% url 'account_creation_options' %}">Create Account</a></li>
 
 
 </div>

@@ -4,9 +4,12 @@
 
 {% block body %}
 
-Successful transfer from card {{card_num}} to account {{beneficiary}}
+<h1><u>Transfer Successful</u></h1><br>
+
+<h3>Successful transfer from card {{card_num}} to account {{beneficiary}}</h3>
 <br>
 Remaining Balance: {{balance}}
-<li><a href="{% url 'options' card_num%}">Return to options</a></li>
+<br>
+<a href="{% url 'options' card_num%}" class="btn btn-dark btn-lg">Return</a>
 
 {% endblock %}

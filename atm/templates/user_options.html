@@ -4,15 +4,24 @@
 
 {% block body %}
 
-<h1>This is the user options page.(check balace, withdraw, transfer funds)</h1>
 
-    Card number: {{card_num}}
-    <li><a href="{% url 'check_balance' card_num%}">Check Balance</a></li>
-    <li><a href="{% url 'view_transactions' card_num%}">View Transactions</a></li>
-    <li><a href="{% url 'withdraw' card_num%}">Withdraw</a></li>
-    <li><a href="{% url 'transfer' card_num%}">Transfer</a></li>
+<h1>How can we help you?</h1>
+
+<h3>Card number: {{card_num}}</h3><br>
 
 
-<p>This is the user options page.(check balace, withdraw, transfer funds)</p>
+
+
+
+
+    <a href="{% url 'check_balance' card_num%}" class="btn btn-dark btn-lg">Check Balance</a><br><br>
+    <a href="{% url 'view_transactions' card_num%}" class="btn btn-dark btn-lg">View Transactions</a><br><br>
+    <a href="{% url 'withdraw' card_num%}" class="btn btn-dark btn-lg">Withdraw</a><br><br>
+    <a href="{% url 'transfer' card_num%}" class="btn btn-dark btn-lg">Transfer</a>
+
+
+
+
+
 
 {% endblock %}

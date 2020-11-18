@@ -4,15 +4,26 @@
 
 {% block body %}
 
+<h1><u>Transfer Funds</u></h1><br>
+
 Card num: {{card_num}}
+<br><br
     <form action="{% url 'process_transfer' card_num%}" method="post">
+    <table>
         {% csrf_token %}
-        {{form.as_p}}
+        {{form.as_table}}
+
             <label for="beneficiary">Beneficiary:</label>
             <input type="text" name="beneficiary"><br>
             <label for="amount" >Amount:</label>
             <input type="text" name="amount"><br>
+        <br>
             <input type="submit" value="Transfer">
+        </table>
     </form>
+
+<br>
+
+<a href="{% url 'options' card_num%}" class="btn btn-dark btn-lg">Return</a>
 
 {% endblock %}

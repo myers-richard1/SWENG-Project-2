@@ -4,16 +4,20 @@
 
 {% block body %}
 
-<h1>Log-in Failed</h1>
+<h1>Log-in Failed</h1><br>
 
-<p>Invalid Account Credentials</p>
+<h3>Invalid Account Credentials</h3><br>
 
 <form action="{% url 'verify' %}" method="post">
+    <table>
     {% csrf_token %}
     {{form.as_p}}
+    </table>
+    <br>
         <input type="submit" value="Log-in">
 
 </form>
-<li><a href="{% url 'account_creation_options' %}">Create Account</a></li>
+<br>
+<a href="{% url 'account_creation_options' %}" class="btn btn-dark btn-lg">Create Account</a>
 
 {% endblock %}

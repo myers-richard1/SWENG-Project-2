@@ -4,11 +4,15 @@
 
 {% block body %}
 
-Transfers:<br>
-{{transfers}}
+<h1><u>Transaction History</u></h1>
+<br>
+
+<h2>Transfers:</h2><br>
+<h3>{{transfers}}</h3>
 <br><br>
-Withdrawals:<br>
-{{withdrawals}}
-<li><a href="{% url 'options' card_num%}">Return to options</a></li>
+<h2>Withdrawals:</h2><br>
+<h3>{{withdrawals}}</h3>
+<br><br>
+<a href="{% url 'options' card_num%}" class="btn btn-dark btn-lg">Return</a>
 
 {% endblock %}

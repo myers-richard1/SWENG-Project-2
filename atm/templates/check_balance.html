@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %} Transfer {% endblock %}
+{% block title %} Balance {% endblock %}
 
 {% block body %}
 
-Remaining Balance: {{balance}}
-<li><a href="{% url 'options' card_num%}">Return to options</a></li>
+<h1><u>Remaining Balance:</u></h1><br>
+<h3>{{balance}}</h3><br>
+<a href="{% url 'options' card_num%}" class="btn btn-dark btn-lg">Return</a><br><br
 
 {% endblock %}

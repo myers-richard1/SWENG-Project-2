@@ -4,13 +4,19 @@
 
 {% block body %}
 
-<h1>Account Creation Page</h1>
+<h1><u>Create Account</u></h1>
+<br>
 
 <form action="{% url 'create_account' %}" method="post">
+<table>
     {% csrf_token %}
-    {{form.as_p}}
+    {{form.as_table}}
+</table>
+    <br>
         <input type="submit" value="Create Account">
 
 </form>
+<br>
+<a href="{% url 'home' %}" class="btn btn-dark btn-lg">Return</a>
 
 {% endblock %}
