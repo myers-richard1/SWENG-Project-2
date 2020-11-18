@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import user_home, user_options, withdraw, transfer, verify, create_account, account_creation_options
 from .views import check_balance, process_withdrawal, process_transfer, transfer_results, withdrawal_results
+from .views import login_fail, view_transactions
 
 urlpatterns = [
     path('', user_home, name='home'),
@@ -16,5 +17,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('verification/', verify, name="verify"),
     path('create_account', create_account, name="create_account"),
-    path('account_creation_options/', account_creation_options, name="account_creation_options")
+    path('account_creation_options/', account_creation_options, name="account_creation_options"),
+    path('login_fail/', login_fail, name="login_fail"),
+    path('<int:card_num>/view_transactions', view_transactions, name="view_transactions")
 ]
