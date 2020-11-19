@@ -62,8 +62,11 @@ def account_creation_options(request):
 
 #get
 def user_options(request, card_num):
-    print(card_num)
-    context = {'card_num' : card_num} 
+    try:
+        card = Card.objects.get(pk=card_num)
+    except Card.DoesNotExist:
+        print("Card doesnt exist")
+    context = {'card_num' : card_num, 'name' : "test"}
     return render(request, 'user_options.html', context)
 
 #get
