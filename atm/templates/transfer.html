@@ -7,7 +7,7 @@
 <h1><u>Transfer Funds</u></h1><br>
 
 Card num: {{card_num}}
-<br><br
+<br><br>
     <form action="{% url 'process_transfer' card_num%}" method="post">
     <table>
         {% csrf_token %}
